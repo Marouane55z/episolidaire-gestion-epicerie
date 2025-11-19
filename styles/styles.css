@@ -1,0 +1,416 @@
+/* ========================= Variables ========================= */
+:root {
+    --sidebar-w: 260px;
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --primary: #0071e3;
+    --accent: #2ecc71;
+    --text: #1c1c1e;
+    --muted: #6e6e73;
+    --border: #e6e6ea;
+    --shadow: 0 8px 24px rgba(15, 15, 15, 0.06);
+    --radius: 12px;
+    --gap: 18px;
+
+    font-family: "Inter", "SF Pro Display", system-ui, -apple-system, 
+                 "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================= Reset & Base ========================= */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.35;
+    margin-left: var(--sidebar-w); /* espace pour sidebar fixe */
+    min-height: 100vh;
+    font-size: 15px;
+}
+
+/* Reset marges sur titres, paragraphes, listes, tables */
+h1, h2, h3, h4, p, ul, ol, table {
+    margin: 0;
+    padding: 0;
+}
+
+.separateur {
+    border:none;
+    border-top:1px solid #e6e6ea;
+    margin: 20px 0;
+}
+
+/* ========================= Sidebar ========================= */
+#menuGauche {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--sidebar-w);
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
+    box-shadow: var(--shadow);
+    border-right: 1px solid rgba(0,0,0,0.03);
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 30;
+    overflow: auto;
+}
+
+/* ========================= Logo / Infos utilisateur ========================= */
+#infosUtil {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+}
+
+#infosUtil img {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+#infosUtil .appTitle {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.05rem;
+}
+
+/* ========================= Menu Sidebar ========================= */
+#menuList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#menuList li {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* liens interactifs */
+#menuList li.smenu a {
+    display: block;
+    text-decoration: none;
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 10px;
+    transition: all .18s ease;
+    font-weight: 600;
+}
+
+#menuList li.smenu a:hover {
+    background: rgba(0,113,227,0.08);
+    color: var(--primary);
+    transform: translateX(4px);
+}
+
+/* lien actif */
+#menuList li.smenu a.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 6px 18px rgba(0,113,227,0.12);
+}
+
+/* pousse le footer en bas */
+#menuGauche .spacer {
+    flex: 1;
+}
+
+/* ========================= Main Content ========================= */
+h2 {
+    color: var(--text);
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+/* ========================= Containers / Tables ========================= */
+.listeLegere {
+    width: calc(100% - 80px);
+    max-width: 1100px;
+    margin: 20px auto;
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+/* tables */
+.listeLegere table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.98rem;
+}
+
+.listeLegere th, .listeLegere td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+.listeLegere th {
+    background: #fbfbfd;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 0.92rem;
+}
+
+.listeLegere tr:hover td {
+    background: rgba(0,0,0,0.01);
+}
+
+/* colonnes spécifiques */
+.listeLegere th.date, .listeLegere td.date {
+    width: 160px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.listeLegere th.action, .listeLegere td.action {
+    width: 120px;
+    text-align: center;
+}
+
+/* ========================= Form Elements ========================= */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #fff;
+    outline: none;
+    transition: box-shadow .15s ease, border-color .15s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 6px 18px rgba(0,113,227,0.08);
+}
+
+/* ========================= Buttons ========================= */
+input[type="submit"], button {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+
+input[type="submit"]:hover, button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,113,227,0.12);
+}
+
+/* secondaire */
+.btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    box-shadow: none;
+}
+
+/* ========================= Blocks d'alerte / info ========================= */
+.bloc-erreur {
+    background: #fff0f0;
+    border: 1px solid #ffc0c0;
+    color: #c00;
+    padding: 18px 22px;
+    border-radius: var(--radius);
+    margin: 20px auto;
+    width: calc(100% - 80px);
+    max-width: 1100px;
+    box-shadow: var(--shadow);
+}
+
+.bloc-info {
+    background: #eef;
+    border: 1px solid #ccf;
+    color: #0071e3;
+    padding: 18px 22px;
+    border-radius: var(--radius);
+    margin: 20px auto;
+    width: 100%;
+}
+
+.bloc-info strong {
+    color: #0056b3;
+}
+
+/* ========================= Boutons spéciaux ========================= */
+.btn-cta {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform .12s ease, box-shadow .12s ease;
+    margin-bottom: 14px;
+}
+
+.btn-validate {
+    display: inline-block;
+    padding: 5px 12px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .12s ease;
+    box-shadow: 0 4px 12px rgba(46,204,113,0.15);
+}
+
+.btn-validate:hover {
+    background: #27ae60;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(46,204,113,0.2);
+}
+
+.btn-validate:active {
+    background: #239b56;
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(46,204,113,0.1);
+}
+
+.btn-danger {
+    display: inline-block;
+    padding: 5px 12px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    background: #fbebee;
+    color: #c00;
+    border: 1px solid #ffc0c0;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .12s ease;
+}
+
+.btn-danger:hover {
+    background: #c00;
+    color: #fff;
+    border-color: #c00;
+    transform: translateY(-1px);
+}
+
+.btn-warning {
+    display: inline-block;
+    padding: 5px 12px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    background: #f39c12;
+    color: #fff;
+    border: 1px solid #f39c12;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .12s ease;
+}
+
+.btn-warning:hover {
+    background: #e67e22;
+    border-color: #e67e22;
+    transform: translateY(-1px);
+}
+
+/* ========================= Misc / Helpers ========================= */
+.text-danger {
+    color: #c00;
+    font-weight: 600;
+}
+
+input[type='number'] {
+    width: 60px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ========================= PDF ========================= */
+.pdf {
+    margin: 20px auto; 
+    width: calc(100% - 80px); 
+    max-width: 1100px; 
+    text-align: right;
+}
+
+/* ========================= Responsive ========================= */
+@media (max-width: 900px) {
+    #menuGauche {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        padding: 12px;
+        gap: 8px;
+    }
+    body {
+        margin-left: 0;
+    }
+    #pharesGecet, #piedP {
+        margin-left: 0;
+        width: 100%;
+    }
+    .listeLegere {
+        width: calc(100% - 32px);
+        margin: 14px;
+        padding: 14px;
+    }
+    #menuList {
+        flex-direction: row;
+        gap: 6px;
+        overflow-x: auto;
+    }
+    #menuList li {
+        white-space: nowrap;
+        font-size: 0.9rem;
+    }
+}
