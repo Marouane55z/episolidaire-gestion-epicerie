@@ -1,4 +1,4 @@
-﻿<!-- Barre latérale fixe -->
+<!-- Barre latérale fixe -->
 <div id="menuGauche">
     
     <!-- Zone d'informations utilisateur avec logo et titre de l'application -->

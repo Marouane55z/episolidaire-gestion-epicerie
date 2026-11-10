@@ -1,4 +1,4 @@
-﻿<div class="listeLegere">
+<div class="listeLegere">
 
     <!-- Titre du tableau -->
     <caption><h2>Liste des commerces enregistrés</h2></caption>

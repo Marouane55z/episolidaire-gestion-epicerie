@@ -1,0 +1,26 @@
+# Démonstration locale : docker compose up, puis http://localhost:8080
+# La base n'est pas exposée hors du réseau Docker ; aucun secret n'est nécessaire.
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      EPI_DB_HOST: db
+      EPI_DB_NAME: getcet
+      EPI_DB_USER: root
+      EPI_DB_PASSWORD: ""
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: "1"
+    volumes:
+      - ./sql/getcet.sql:/docker-entrypoint-initdb.d/01-getcet.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      retries: 20

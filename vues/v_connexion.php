@@ -1,4 +1,4 @@
-﻿<div class="listeLegere"> 
+<div class="listeLegere"> 
     
     <!-- Titre de la section -->
     <h2>Identification utilisateur</h2>

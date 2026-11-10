@@ -1,4 +1,4 @@
-﻿<!-- Tableau des acheteurs enregistrés -->
+<!-- Tableau des acheteurs enregistrés -->
 <table class="listeLegere">
     <caption>Liste des acheteurs enregistrés</caption>
 

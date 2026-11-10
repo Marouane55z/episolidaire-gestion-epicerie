@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Contrôleur de gestion de la connexion utilisateur
  * -------------------------------------------------

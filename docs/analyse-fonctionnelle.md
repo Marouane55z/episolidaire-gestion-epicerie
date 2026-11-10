@@ -61,4 +61,4 @@ Un produit périmé ou proche de sa date de péremption peut être déclaré **d
 | --- | --- | --- |
 | Suppressions par liens GET sans jeton | Suppression involontaire ou forgée (CSRF) | Formulaires POST + jeton CSRF |
 | Sorties HTML non échappées | Injection de script (XSS) si une donnée est malveillante | `htmlspecialchars()` sur chaque affichage |
-| Dossier `include/` et SQL non versionnés | Projet non installable par un tiers | Versionner avec une configuration d'exemple |
+| Dossier `include/` et SQL non versionnés | Projet non installable par un tiers | Traité : `include/` versionné sans identifiants, schéma SQL reconstitué avec données fictives |

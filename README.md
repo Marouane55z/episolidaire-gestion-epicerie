@@ -48,38 +48,54 @@ controleurs/              logique de chaque domaine (connexion, commandes, stock
 vues/                     gabarits HTML/PHP
 styles/                   feuille de style
 generer_pdf_commandes.php export PDF des commandes (réservé épicier / maire)
+include/                  modèle PDO, fonctions de session, bibliothèque FPDF
+sql/getcet.sql            schéma et données de démonstration
 ```
-
-## Prérequis
-
-- PHP et un serveur web (Apache, ou `php -S` en local)
-- MySQL / MariaDB
-- La bibliothèque FPDF pour l'export PDF
 
 ## Installation
 
-> **Important :** le dossier `include/` (classe `Modele`, fonctions de session, FPDF) et le script SQL de la base ne sont pas encore versionnés. L'application ne peut donc pas être lancée depuis ce dépôt en l'état. Ils seront ajoutés avec une configuration sans identifiants (voir « Améliorations prévues »).
+Aucun identifiant n'est stocké dans le dépôt. La connexion à la base se règle par variables d'environnement `EPI_DB_*`, ou par un fichier `include/config.php` non versionné ; sans réglage, l'application utilise les valeurs d'une installation locale (MySQL sur `localhost`, utilisateur `root` sans mot de passe).
 
-Une fois ces fichiers ajoutés :
+### Option 1 : Docker
 
 ```bash
 git clone https://github.com/Marouane55z/episolidaire-gestion-epicerie.git
 cd episolidaire-gestion-epicerie
-php -S localhost:8000
+docker compose up --build
 ```
+
+Puis ouvrir http://localhost:8080. La base est créée et remplie automatiquement au premier démarrage.
+
+### Option 2 : XAMPP, WAMP ou MAMP
+
+1. Copier le dossier du projet dans le répertoire web (`htdocs/` pour XAMPP).
+2. Importer `sql/getcet.sql` dans phpMyAdmin (onglet **Importer**) ou avec `mysql -u root < sql/getcet.sql`.
+3. Ouvrir http://localhost/episolidaire-gestion-epicerie/.
+
+Si votre MySQL n'utilise pas `root` sans mot de passe, copier `include/config.example.php` en `include/config.php` et y renseigner vos paramètres.
+
+### Comptes de démonstration
+
+| Identifiant | Mot de passe | Accès |
+| --- | --- | --- |
+| `secretaire` | `demo` | Commerces partenaires |
+| `epicier` | `demo` | Acheteurs, commandes, stock, périmés |
+| `maire` | `demo` | Toutes les fonctionnalités |
+
+Toutes les données sont fictives. Le script SQL a été reconstitué à partir des requêtes de `include/modele.php`, le script d'origine n'ayant pas été conservé ; les dates de péremption sont calculées par rapport au jour de l'import.
 
 ## Limites connues
 
-- Dossier `include/` et script SQL absents du dépôt.
 - Les actions de suppression passent par des liens GET sans jeton anti-CSRF.
 - Certaines vues affichent des données sans échappement HTML (`htmlspecialchars`).
+- Les droits par métier sont appliqués dans le menu, mais pas encore dans tous les contrôleurs (la gestion des commerces reste accessible par URL directe).
 - Pas de tests automatisés.
 
 ## Améliorations prévues
 
-- Versionner `include/` avec un fichier de configuration d'exemple (`include/config.example.php`) et le script SQL avec des données fictives.
 - Échapper systématiquement les sorties HTML et passer les suppressions en POST avec jeton CSRF.
-- Ajouter des captures d'écran et une démonstration.
+- Vérifier le métier de l'utilisateur dans chaque contrôleur.
+- Ajouter des captures d'écran.
 
 ## Documentation complémentaire
 
